@@ -1,59 +1,821 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baz14</title>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baz14 - Vasiliy Yasko</title>
+
+  <meta name="description"
+    content="GIS developer specializing in ESRI, QGIS, GeoServer, Unreal Engine 3D, and web/Python—moving toward Digital Twin engineering." />
+  <meta name="author" content="Vasiliy Yasko" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Vasiliy Yasko · Baz14" />
+  <meta property="og:description"
+    content="GIS developer and specialist focused on ESRI, QGIS, GeoServer, Unreal, web/Python—aiming at Digital Twins." />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/82385333?v=4" />
+  <meta property="og:url" content="https://baz14.github.io/" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5RNXPMT51"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-P5RNXPMT51');
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-P5RNXPMT51");
   </script>
+
   <style>
-    body{
-      text-align: center;
-      width: 450px;
-      min-width: 450px;
-      margin: auto;
+    :root {
+      --bg: #0b0c10;
+      --fg: #e8e8e8;
+      --muted: #b3b3b3;
+      --accent: #ff4d4d;
+      --card: #121316;
+      --link: #7db2ff;
+      --ring: rgba(255, 77, 77, .35);
     }
-    #logo {
-      margin: 15px;
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #fff;
+        --fg: #131416;
+        --muted: #4b4f56;
+        --accent: #b20c0c;
+        --card: #f7f7f9;
+        --link: #0a66c2;
+        --ring: rgba(178, 12, 12, .22);
+      }
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      min-width: 370px;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .container {
+      max-width: 860px;
+      padding: 24px;
+      margin: 0 auto
+    }
+
+    /* Header layout */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas: "title" "avatar" "intro";
+      gap: 20px;
+      padding: 32px 0;
+    }
+
+    .header .title {
+      grid-area: title;
+      margin: 0 0 6px;
+      line-height: 1.2;
+      text-align: center
+    }
+
+    .header .avatar {
+      grid-area: avatar;
+      justify-self: center;
+      width: 300px;
+      height: 300px;
       border-radius: 20px;
-      box-shadow: 0px 0px 20px 10px rgb(178 12 12);
-  }
+      object-fit: cover;
+      box-shadow: 0 0 28px 10px rgba(178, 12, 12, .35);
+      border: 1px solid rgba(255, 255, 255, .08)
+    }
+
+    .header .intro {
+      grid-area: intro
+    }
+
+    .header .subtitle {
+      color: var(--muted);
+      margin: 0 0 8px;
+      padding: 5px 15px
+    }
+
+    @media (min-width:820px) {
+      .header {
+        grid-template-columns: 300px 1fr;
+        grid-template-areas: "avatar title" "avatar intro";
+        align-items: center;
+        gap: 30px;
+      }
+
+      .header .avatar {
+        justify-self: start
+      }
+
+      .header .intro {
+        text-align: left
+      }
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 6px;
+      line-height: 1.2
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: .9rem;
+      padding: 5px 15px;
+      border-radius: 35px;
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .08);
+      margin-top: 10px
+    }
+
+    .card {
+      min-width: 320px;
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 16px 0
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px
+    }
+
+    @media (min-width:820px) {
+      .grid.cols-2 {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 10px 0
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .linkchip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px dashed rgba(255, 255, 255, .18)
+    }
+
+    .linkchip:hover {
+      border-style: solid;
+      box-shadow: 0 0 0 6px var(--ring);
+      text-decoration: none
+    }
+
+    .org-logo {
+      border-radius: 50%;
+      vertical-align: -3px
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: .95rem;
+      text-align: center
+    }
+
+    .footer-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center
+    }
+
+    .footer-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500
+    }
+
+    .footer-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .footer-right div {
+      margin: 2px 0
+    }
+
+    @media (min-width:768px) {
+      .footer-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left
+      }
+
+      .footer-left {
+        flex: 0 0 auto;
+        margin-left: 100px
+      }
+
+      .footer-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-right: 100px
+      }
+    }
+
+    /* Philosophy UI */
+    .philo-intro {
+      margin: 0 0 10px;
+      color: var(--muted)
+    }
+
+    .philo-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 12px
+    }
+
+    @media (min-width:768px) {
+      .philo-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    .philo-card {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 12px;
+      padding: 14px 16px
+    }
+
+    .philo-head {
+      margin: 0 0 8px;
+      font-size: 1.05rem
+    }
+
+    .philo-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0
+    }
+
+    .philo-list li {
+      margin: 6px 0
+    }
+
+    .philo-list a {
+      text-decoration: none
+    }
+
+    .philo-list a:hover {
+      text-decoration: underline
+    }
+
+    /* Tools grid */
+    .support-tools {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      text-align: left;
+      max-width: 1000px;
+      margin: 10px auto;
+    }
+
+    @media (min-width:768px) {
+      .support-tools {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+    }
+
+    @media (min-width:1200px) {
+      .support-tools {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+      }
+    }
+
+    .support-tools .ico {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      border-radius: 50%;
+      margin-right: 6px
+    }
+
+    .support-tools a {
+      text-decoration: none
+    }
+
+    .support-tools a:hover {
+      text-decoration: underline
+    }
+
+    .summary {
+      cursor: pointer;
+      opacity: .9;
+      box-shadow: 0 0 5px 3px rgba(178, 12, 12, .35)
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .ico {
+        filter: invert(1) brightness(2);
+      }
+    }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Vasiliy Yasko",
+    "alternateName":"Baz14",
+    "image":"https://avatars.githubusercontent.com/u/82385333?v=4",
+    "url":"https://baz14.github.io/",
+    "jobTitle":"GIS Developer / Digital Twin Engineer",
+    "worksFor":[{"@type":"Organization","name":"GEOSOL"},{"@type":"Organization","name":"ISGEO"}],
+    "sameAs":["https://github.com/baz14","https://x.com/baziliy14","https://www.linkedin.com/in/baz14", "https://mapstodon.space/@baz14"],
+    "email":"mailto:me@baz2.ch"
+  }
+  </script>
+
 </head>
-<body style="text-align: center">
-  <h2>
-    👋 Hi<br/>
-    I'm Vasiliy Yasko
-  </h2>
-  <p>
-    I’m a software engineer focused on <strong>self-hosted infrastructure</strong>, <strong>DevOps automation</strong>, 
-    <strong>GIS systems</strong> (QGIS, ArcGIS), and <strong>Digital Twin technologies</strong> - with a strong foundation in 
-    <strong>web development</strong> (JavaScript, React, Angular, Node.js) and Python for backend and <strong>data processing</strong>.
-  </p>
-  <img id="logo" src="https://avatars.githubusercontent.com/u/82385333?v=4" alt="avatar github baz14"/>
-  <p>
-    My goal is to build scalable, privacy-respecting digital infrastructure and contribute to impactful, real-world applications in GIS 
-    and smart city development
-  </p> 
-  <p>
-    My X.com - <a targer="_blank" href="https://x.com/baziliy14" title="https://x.com/baziliy14">https://x.com/baziliy14</a>
-  </p>
-  <p>
-    My GitHub - <a targer="_blank" href="http://www.github.com/baz14" title="github.com/baz14">http://www.github.com/baz14</a>
-  </p>
-  <p>
-    My LinkedIn - <a targer="_blank" href="http://www.linkedin.com/in/baz14" title="linkedin.com/in/baz14">http://www.linkedin.com/in/baz14</a>
-  </p>
-  </p>
-    My Email - <a href="mailto:me@baz2.ch" title="me@baz2.ch">me@baz2.ch</a>
-  </p>
+
+<body>
+  <main class="container">
+    <header class="header">
+      <h1 class="title">👋 Hi, I’m Vasiliy Yasko</h1>
+
+      <a href="https://github.com/baz14" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"
+        class="avatar">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/82385333?v=4"
+          alt="Avatar of Vasiliy Yasko (Baz14)" />
+      </a>
+
+      <div class="intro">
+        <p class="subtitle">
+          GIS developer & specialist working with ESRI, QGIS, GeoServer, Unreal Engine (3D/real-time), and modern
+          web/Python.
+        </p>
+        <span class="badge">
+          <strong>Currently:</strong> working as a GIS developer with <strong><span id="yexp"></span> years</strong> of
+          Smart City project experience.<br />
+          <strong>My Goals:</strong> deepen expertise in Unreal Engine and ESRI to contribute to Digital Twin
+          development for infrastructure and urban innovation worldwide.
+        </span>
+      </div>
+    </header>
+
+
+    <section class="card" aria-labelledby="about">
+      <h2 id="about">About</h2>
+      <p>
+        I work with
+        <a href="https://github.com/geosolutionskyiv" target="_blank" rel="noopener noreferrer"
+          style="display:inline-flex;align-items:center;gap:6px;position:relative;top:5px;">
+          <img src="https://avatars.githubusercontent.com/u/139236446?s=200&v=4" alt="GEOSOL GitHub" width="20"
+            height="20" class="org-logo" />
+          GEOSOL
+        </a>
+        and
+        <a href="https://github.com/ISGEOCOMPANY" target="_blank" rel="noopener noreferrer"
+          style="display:inline-flex;align-items:center;gap:6px;position:relative;top:5px;">
+          <img src="https://avatars.githubusercontent.com/u/106861238?s=96&v=4" alt="ISGEO GitHub" width="20"
+            height="20" class="org-logo" />
+          ISGEO
+        </a>
+        as a GIS developer and GIS specialist. My expertise spans ESRI products and Unreal Engine for 3D visualization,
+        plus plugins and automation for QGIS, ArcGIS Pro, GeoServer, and PostgreSQL/PostGIS. I also build web apps
+        (JavaScript, React, Angular, Node.js) and Python backends for data processing and integration.
+      </p>
+      <p>
+        I’ve contributed to government projects and collaborated with large enterprises (banks, infrastructure) where
+        GIS is mission-critical. I’m active in Smart City initiatives—especially administrative systems and road
+        infrastructure—with a strong focus on digital twins and urban automation.
+      </p>
+      <p>
+        My goal is to deepen expertise in GIS automation, real-time 3D, and smart-city infrastructure—building scalable
+        systems that connect geospatial data, web tech, and digital twins for impactful applications.
+      </p>
+    </section>
+
+
+    <section class="grid cols-2">
+      <div class="card" aria-labelledby="skills">
+        <h2 id="skills">Core skills</h2>
+        <ul>
+          <li>ESRI stack, QGIS, ArcGIS Pro, GeoServer</li>
+          <li>PostgreSQL/PostGIS, spatial ETL, data pipelines</li>
+          <li>Unreal Engine (3D/real-time visualization)</li>
+          <li>JavaScript/TypeScript (React, Angular), Node.js</li>
+          <li>Python (automation, APIs, data processing)</li>
+          <li>Plugins, extensions, and custom frameworks for GIS</li>
+        </ul>
+      </div>
+
+      <div class="card" aria-labelledby="focus">
+        <h2 id="focus">Current focus</h2>
+        <ul>
+          <li>Digital twins for Smart City / infrastructure</li>
+          <li>Deploying services with Docker & Kubernetes (k3s) on Linux servers</li>
+          <li>Real-time geospatial visualization and automation</li>
+          <li>Reliable web services for GIS integrations</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <section class="card" aria-labelledby="lab">
+      <h2 id="lab">Hands-on: VPS / K3s Lab</h2>
+      <p class="subtitle">I run a personal cluster to practice production skills for Digital Twins.</p>
+      <div class="grid">
+        <div>
+          <h3 style="margin:.2rem 0 .4rem;">Stack I operate</h3>
+          <ul>
+            <li>K3s (Kubernetes) on Linux (Ubuntu / Fedora / Rocky)</li>
+            <li>Traefik (ingress, Let’s Encrypt TLS), Docker runtime</li>
+            <li>Keycloak (SSO/IAM), MinIO (S3), OpenSearch (search)</li>
+            <li>Prometheus + Grafana (metrics/alerts), Loki (logs)</li>
+            <li>Argo CD (GitOps), Helm (packaging), Terraform & Ansible (IaC)</li>
+            <li>Proxmox VE (virtualization) for homelab nodes</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin:.2rem 0 .4rem;">Operational strengths</h3>
+          <ul>
+            <li>Designing namespaces, RBAC, and network policies</li>
+            <li>GitOps workflows, progressive delivery, safe rollbacks</li>
+            <li>TLS, OIDC/SSO, and secrets & identity management</li>
+            <li>Backups & disaster recovery with S3/object storage</li>
+            <li>Observability: metrics, logs, dashboards, alerting</li>
+            <li>Cost awareness & right-sizing for edge/DT workloads</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="card" aria-labelledby="philosophy">
+      <h2 id="philosophy">Philosophy & Inspirations</h2>
+      <p class="philo-intro">
+        My worldview is shaped by thinkers and activists who stood against war, supported science, promoted open
+        knowledge, and defended fairness in technology.
+      </p>
+
+      <div class="philo-grid">
+        <div class="philo-card">
+          <h3 class="philo-head">✌️ Peace</h3>
+          <ul class="philo-list">
+            <li><a href="https://plato.stanford.edu/entries/kant/" target="_blank" rel="noopener noreferrer">Immanuel
+                Kant</a> — <em>Perpetual Peace</em></li>
+            <li><a href="https://plato.stanford.edu/entries/russell/" target="_blank" rel="noopener noreferrer">Bertrand
+                Russell</a> — pacifism</li>
+          </ul>
+        </div>
+
+        <div class="philo-card">
+          <h3 class="philo-head">🧪 Science</h3>
+          <ul class="philo-list">
+            <li><a href="https://plato.stanford.edu/entries/popper/" target="_blank" rel="noopener noreferrer">Karl
+                Popper</a> — falsifiability</li>
+            <li><a href="https://en.wikipedia.org/wiki/Francis_Bacon" target="_blank" rel="noopener noreferrer">Francis
+                Bacon</a> — empiricism</li>
+            <li><a href="https://www.feynman.com/" target="_blank" rel="noopener noreferrer">Richard Feynman</a> —
+              curiosity</li>
+          </ul>
+        </div>
+
+        <div class="philo-card">
+          <h3 class="philo-head">🌍 Open Knowledge</h3>
+          <ul class="philo-list">
+            <li><a href="https://plato.stanford.edu/entries/mill/" target="_blank" rel="noopener noreferrer">John Stuart
+                Mill</a> — free expression</li>
+            <li><a href="https://en.wikipedia.org/wiki/Aaron_Swartz" target="_blank" rel="noopener noreferrer">Aaron
+                Swartz</a> — open access</li>
+            <li><a href="https://hls.harvard.edu/faculty/lawrence-lessig/" target="_blank"
+                rel="noopener noreferrer">Lawrence Lessig</a> — free culture</li>
+          </ul>
+        </div>
+
+        <div class="philo-card">
+          <h3 class="philo-head">💻 Open Source</h3>
+          <ul class="philo-list">
+            <li><a href="https://stallman.org/" target="_blank" rel="noopener noreferrer">Richard Stallman</a> — GNU/FSF
+            </li>
+            <li><a href="https://en.wikipedia.org/wiki/Linus_Torvalds" target="_blank" rel="noopener noreferrer">Linus
+                Torvalds</a> — Linux</li>
+            <li><a href="https://en.wikipedia.org/wiki/Yochai_Benkler" target="_blank" rel="noopener noreferrer">Yochai
+                Benkler</a> — <em>The Wealth of Networks</em></li>
+          </ul>
+        </div>
+
+        <div class="philo-card">
+          <h3 class="philo-head">⚖️ Fairness & Ethics</h3>
+          <ul class="philo-list">
+            <li><a href="https://plato.stanford.edu/entries/arendt/" target="_blank" rel="noopener noreferrer">Hannah
+                Arendt</a> — responsibility</li>
+            <li><a href="https://en.wikipedia.org/wiki/Amartya_Sen" target="_blank" rel="noopener noreferrer">Amartya
+                Sen</a> — capability</li>
+            <li><a href="https://en.wikipedia.org/wiki/Shoshana_Zuboff" target="_blank"
+                rel="noopener noreferrer">Shoshana Zuboff</a> — surveillance capitalism</li>
+            <li><a href="https://en.wikipedia.org/wiki/John_Rawls" target="_blank" rel="noopener noreferrer">John
+                Rawls</a> — justice as fairness</li>
+            <li><a href="https://en.wikipedia.org/wiki/Martha_Nussbaum" target="_blank" rel="noopener noreferrer">Martha
+                Nussbaum</a> — capabilities approach</li>
+            <li><a href="https://where.coraline.codes/" target="_blank" rel="noopener noreferrer">Coraline Ada Ehmke</a>
+              — Hippocratic License</li>
+          </ul>
+        </div>
+
+        <div class="philo-card">
+          <h3 class="philo-head">💡 Computing Pioneers</h3>
+          <ul class="philo-list">
+            <li><a href="https://en.wikipedia.org/wiki/Alan_Turing" target="_blank" rel="noopener noreferrer">Alan
+                Turing</a> — CS & AI</li>
+            <li><a href="https://en.wikipedia.org/wiki/John_von_Neumann" target="_blank" rel="noopener noreferrer">John
+                von Neumann</a> — architecture</li>
+            <li><a href="https://www.cs.utexas.edu/users/EWD/" target="_blank" rel="noopener noreferrer">Edsger W.
+                Dijkstra</a> — algorithms</li>
+            <li><a href="https://www-cs-faculty.stanford.edu/~knuth/" target="_blank" rel="noopener noreferrer">Donald
+                Knuth</a> — TAOCP, TeX</li>
+            <li><a href="https://www.stroustrup.com/" target="_blank" rel="noopener noreferrer">Bjarne Stroustrup</a> —
+              C++</li>
+            <li><a href="https://gvanrossum.github.io/" target="_blank" rel="noopener noreferrer">Guido van Rossum</a> —
+              Python</li>
+            <li><a href="https://www.cs.vu.nl/~ast/" target="_blank" rel="noopener noreferrer">Andrew S. Tanenbaum</a> —
+              MINIX, networks</li>
+            <li>
+              <a href="https://www.cs.princeton.edu/~bwk/" target="_blank" rel="noopener noreferrer">Brian Kernighan</a>
+              &
+              <a href="https://en.wikipedia.org/wiki/Dennis_Ritchie" target="_blank" rel="noopener noreferrer">Dennis
+                Ritchie</a> — C, UNIX
+            </li>
+            <li><a href="https://en.wikipedia.org/wiki/Ken_Thompson" target="_blank" rel="noopener noreferrer">Ken
+                Thompson</a> — UNIX</li>
+            <li><a href="https://www.w3.org/People/Berners-Lee/" target="_blank" rel="noopener noreferrer">Tim
+                Berners-Lee</a> — WWW</li>
+          </ul>
+        </div>
+
+        <div class="philo-card">
+          <h3 class="philo-head">🌍 GIS & Digital Twin Pioneers</h3>
+          <ul class="philo-list">
+            <li><a href="https://en.wikipedia.org/wiki/Roger_Tomlinson" target="_blank" rel="noopener noreferrer">Roger
+                Tomlinson</a> — “Father of GIS”</li>
+            <li><a href="https://en.wikipedia.org/wiki/Jack_Dangermond" target="_blank" rel="noopener noreferrer">Jack
+                Dangermond</a> — Esri, GIS to the world</li>
+            <li><a href="https://en.wikipedia.org/wiki/Waldo_Tobler" target="_blank" rel="noopener noreferrer">Waldo
+                Tobler</a> — First Law of Geography</li>
+            <li><a href="https://en.wikipedia.org/wiki/Michael_F._Goodchild" target="_blank"
+                rel="noopener noreferrer">Michael Goodchild</a> — GIScience pioneer</li>
+            <li><a href="https://en.wikipedia.org/wiki/Michael_Grieves" target="_blank"
+                rel="noopener noreferrer">Michael Grieves</a> — coined the “Digital Twin”</li>
+            <li><a href="https://en.wikipedia.org/wiki/Fei-Yue_Wang" target="_blank" rel="noopener noreferrer">Fei-Yue
+                Wang</a> — smart cities & CPS</li>
+            <li><a href="https://scholar.google.com/citations?user=g9GtqgQAAAAJ" target="_blank"
+                rel="noopener noreferrer">Jay Lee</a> — industrial digital twins</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="card" aria-labelledby="links">
+      <h2 id="links">Links</h2>
+      <div class="links" role="list">
+        <a class="linkchip" href="https://github.com/baz14" target="_blank" rel="noopener noreferrer"
+          aria-label="GitHub"><i class="fab fa-github"></i> GitHub</a>
+        <a class="linkchip" href="https://x.com/baziliy14" target="_blank" rel="noopener noreferrer"
+          aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i> X.com</a>
+        <a class="linkchip" href="https://bsky.app/profile/baziliy14.bsky.social" target="_blank"
+          rel="noopener noreferrer" aria-label="Bluesky">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 600 530" fill="currentColor"
+            aria-hidden="true">
+            <path
+              d="M300 300c50-100 150-200 200-200s50 100-50 200c100 100 100 200 50 200s-150-100-200-200c-50 100-150 200-200 200s-50-100 50-200c-100-100-100-200-50-200s150 100 200 200z" />
+          </svg>
+          Bluesky
+        </a>
+        <a class="linkchip" href="https://mapstodon.space/@baz14" target="_blank" rel="noopener noreferrer"
+          aria-label="Mapstodon"><i class="fab fa-mastodon"></i> Mapstodon</a>
+        <a class="linkchip" href="https://www.linkedin.com/in/baz14" target="_blank" rel="noopener noreferrer"
+          aria-label="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a class="linkchip" href="mailto:me@baz2.ch?subject=Let%27s%20Connect" aria-label="Email">
+          <i class="fas fa-envelope"></i> me@baz2.ch
+        </a>
+      </div>
+    </section>
+
+
+    <footer class="footer">
+      <div class="footer-row">
+        <div class="footer-left">
+          © <span id="y"></span>
+          <a href="https://github.com/baz14" target="_blank" rel="noopener noreferrer" class="footer-github">
+            <i class="fab fa-github"></i> Vasiliy Yasko
+          </a>
+          <div style="opacity:.7; margin-left:6px;">v0.0.2</div>
+        </div>
+        <div class="footer-right">
+          <div>Built with <span style="color:red">♥</span> for GIS & Digital Twins</div>
+          <div>✌️ Peace in the world</div>
+          <div>📖 Knowledge is the most important</div>
+          <div>🌍 Free & Open Source Knowledge</div>
+        </div>
+      </div>
+
+      <!-- Tools & orgs -->
+      <details style="margin:20px 0">
+        <summary class="summary">What I support & tools I love</summary>
+        <div class="support-tools">
+          <!-- Philosophy -->
+          <div>
+            <strong>🌍 Philosophy</strong><br />
+            <img src="img/HL3_logo.svg" alt="HL3 Logo" class="ico" loading="lazy" />
+            <a href="https://firstdonoharm.dev/" target="_blank" rel="noopener noreferrer">HL3 License</a><br />
+            <img src="img/GNU_logo.svg" alt="GNU Logo" class="ico" loading="lazy" />
+            <a href="https://www.gnu.org/" target="_blank" rel="noopener noreferrer">GNU</a><br />
+            <img src="img/Linux_logo.svg" alt="Linux Kernel Logo" class="ico" loading="lazy" />
+            <a href="https://www.kernel.org/" target="_blank" rel="noopener noreferrer">Linux</a><br />
+            <img src="img/Ubuntu_logo.svg" alt="Ubuntu Logo" class="ico" loading="lazy" />
+            <a href="https://ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a><br />
+            <img src="img/Fedora_logo.svg" alt="Fedora Logo" class="ico" loading="lazy" />
+            <a href="https://fedoraproject.org/" target="_blank" rel="noopener noreferrer">Fedora</a><br />
+            <img src="img/RockyLinux_logo.svg" alt="Rocky Linux Logo" class="ico" loading="lazy" />
+            <a href="https://rockylinux.org/" target="_blank" rel="noopener noreferrer">Rocky Linux</a><br />
+            <img src="img/OpenSource_logo.svg" alt="Open Source Initiative Logo" class="ico" loading="lazy" />
+            <a href="https://opensource.org/" target="_blank" rel="noopener noreferrer">Open Source</a>
+          </div>
+
+          <!-- GIS Tools -->
+          <div>
+            <strong>🗺 GIS Tools</strong><br />
+            <img src="img/OSGeo_logo.svg" alt="OSGeo Logo" class="ico" loading="lazy" />
+            <a href="https://www.osgeo.org/" target="_blank" rel="noopener noreferrer">OSGeo</a><br />
+            <img src="img/GRASS_logo.svg" alt="GRASS Logo" class="ico" loading="lazy" />
+            <a href="https://grass.osgeo.org/" target="_blank" rel="noopener noreferrer">GRASS</a><br />
+            <img src="img/GDAL_logo.svg" alt="GDAL Logo" class="ico" loading="lazy" />
+            <a href="https://gdal.org/" target="_blank" rel="noopener noreferrer">GDAL</a><br />
+            <img src="img/QGIS_logo.svg" alt="QGIS Logo" class="ico" loading="lazy" />
+            <a href="https://qgis.org/" target="_blank" rel="noopener noreferrer">QGIS</a><br />
+            <img src="img/PostGIS_logo.svg" alt="PostGIS Logo" class="ico" loading="lazy" />
+            <a href="https://postgis.net/" target="_blank" rel="noopener noreferrer">PostGIS</a><br />
+            <img src="img/GeoServer_logo.svg" alt="GeoServer Logo" class="ico" loading="lazy" />
+            <a href="http://geoserver.org/" target="_blank" rel="noopener noreferrer">GeoServer</a><br />
+            <img src="img/OSM_logo.svg" alt="OpenStreetMap Logo" class="ico" loading="lazy" />
+            <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer">OpenStreetMap</a><br />
+            <img src="img/ESRI_logo.svg" alt="ESRI Logo" class="ico" loading="lazy" />
+            <a href="https://www.esri.com/" target="_blank" rel="noopener noreferrer">ESRI</a>
+          </div>
+
+          <!-- AI Tools -->
+          <div>
+            <strong>🤖 AI Tools</strong><br />
+            <img src="img/HuggingFace_logo.svg" alt="Hugging Face Logo" class="ico" loading="lazy" />
+            <a href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">Hugging Face</a><br />
+            <img src="img/PyTorch_logo.svg" alt="PyTorch Logo" class="ico" loading="lazy" />
+            <a href="https://pytorch.org/" target="_blank" rel="noopener noreferrer">PyTorch</a><br />
+            <img src="img/TensorFlow_logo.svg" alt="TensorFlow Logo" class="ico" loading="lazy" />
+            <a href="https://www.tensorflow.org/" target="_blank" rel="noopener noreferrer">TensorFlow</a><br />
+            <img src="img/LangChain_logo.svg" alt="LangChain Logo" class="ico" loading="lazy" />
+            <a href="https://www.langchain.com/" target="_blank" rel="noopener noreferrer">LangChain</a><br />
+            <img src="img/LightLLM_logo.svg" alt="LiteLLM Logo" class="ico" loading="lazy" />
+            <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer">LiteLLM</a><br />
+            <img src="img/Ollama_logo.svg" alt="Ollama Logo" class="ico" loading="lazy" />
+            <a href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Ollama</a>
+          </div>
+
+          <!-- Dev & 3D -->
+          <div>
+            <strong>🛠 Dev & 3D</strong><br />
+            <img src="img/UnrealEngine_logo.svg" alt="Unreal Engine Logo" class="ico" loading="lazy" />
+            <a href="https://www.unrealengine.com/" target="_blank" rel="noopener noreferrer">Unreal Engine</a><br />
+            <img src="img/ZED_logo.svg" alt="Zed Editor Logo" class="ico" loading="lazy" />
+            <a href="https://zed.dev/" target="_blank" rel="noopener noreferrer">Zed Editor</a><br />
+            <img src="img/VSCode_logo.svg" alt="VS Code Logo" class="ico" loading="lazy" />
+            <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a>
+          </div>
+
+          <!-- Infrastructure & Virtualization -->
+          <div>
+            <strong>🖥 Infrastructure & Virtualization</strong><br />
+            <img src="img/K3S_logo.svg" alt="K3s Logo" class="ico" loading="lazy" />
+            <a href="https://k3s.io/" target="_blank" rel="noopener noreferrer">Kubernetes (k3s/k8s)</a><br />
+            <img src="img/Proxmox_logo.svg" alt="Proxmox Logo" class="ico" loading="lazy" />
+            <a href="https://www.proxmox.com/" target="_blank" rel="noopener noreferrer">Proxmox VE</a><br />
+            <img src="img/Docker_logo.svg" alt="Docker Logo" class="ico" loading="lazy" />
+            <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">Docker</a><br />
+            <img src="img/Traefik_logo.svg" alt="Traefik Logo" class="ico" loading="lazy" />
+            <a href="https://traefik.io/" target="_blank" rel="noopener noreferrer">Traefik (Ingress/Proxy)</a><br />
+            <img src="img/Keycloak_logo.svg" alt="Keycloak Logo" class="ico" loading="lazy" />
+            <a href="https://www.keycloak.org/" target="_blank" rel="noopener noreferrer">Keycloak (SSO / IAM)</a><br />
+            <img src="img/MinIO_logo.svg" alt="MinIO Logo" class="ico" loading="lazy" />
+            <a href="https://min.io/" target="_blank" rel="noopener noreferrer">MinIO (Object Storage)</a><br />
+            <img src="img/Grafana_logo.svg" alt="Grafana Logo" class="ico" loading="lazy" />
+            <a href="https://grafana.com/" target="_blank" rel="noopener noreferrer">Grafana</a><br />
+            <img src="img/Prometheus_logo.svg" alt="Prometheus Logo" class="ico" loading="lazy" />
+            <a href="https://prometheus.io/" target="_blank" rel="noopener noreferrer">Prometheus</a><br />
+            <img src="img/OpenSearch_logo.svg" alt="OpenSearch Logo" class="ico" loading="lazy" />
+            <a href="https://opensearch.org/" target="_blank" rel="noopener noreferrer">OpenSearch (Search &
+              Analytics)</a><br />
+            <img src="img/ArgoCD_logo.svg" alt="Argo CD Logo" class="ico" loading="lazy" />
+            <a href="https://argo-cd.readthedocs.io/" target="_blank" rel="noopener noreferrer">Argo CD
+              (GitOps)</a><br />
+            <img src="img/Terraform_logo.svg" alt="Terraform Logo" class="ico" loading="lazy" />
+            <a href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer">Terraform (IaC)</a><br />
+            <img src="img/Ansible_logo.svg" alt="Ansible Logo" class="ico" loading="lazy" />
+            <a href="https://www.ansible.com/" target="_blank" rel="noopener noreferrer">Ansible (Automation)</a>
+          </div>
+
+          <!-- Open knowledge & rights -->
+          <div>
+            <strong>🧪 Science & Knowledge</strong><br />
+            <img src="img/UNESCO_logo.svg" alt="UNESCO Logo" class="ico" loading="lazy" />
+            <a href="https://www.unesco.org/en/open-science" target="_blank" rel="noopener noreferrer">UNESCO Open
+              Science</a><br />
+            <img src="img/CreativeCommon_logo.svg" alt="Creative Commons Logo" class="ico" loading="lazy" />
+            <a href="https://creativecommons.org/" target="_blank" rel="noopener noreferrer">Creative Commons
+              (CC)</a><br />
+            <img src="img/WikimediaFoundation_logo.svg" alt="Wikimedia Foundation Logo" class="ico" loading="lazy" />
+            <a href="https://wikimediafoundation.org/" target="_blank" rel="noopener noreferrer">Wikimedia
+              Foundation</a>
+          </div>
+
+          <div>
+            <strong>💻 Open Source & Digital Freedom</strong><br />
+            <img src="img/FSF_logo.svg" alt="Free Software Foundation Logo" class="ico" loading="lazy" />
+            <a href="https://www.fsf.org/" target="_blank" rel="noopener noreferrer">Free Software Foundation
+              (FSF)</a><br />
+            <img src="img/OpenSource_logo.svg" alt="Open Source Initiative Logo" class="ico" loading="lazy" />
+            <a href="https://opensource.org/" target="_blank" rel="noopener noreferrer">Open Source Initiative
+              (OSI)</a><br />
+            <img src="img/EFF_Logo.svg" alt="Electronic Frontier Foundation Logo" class="ico" loading="lazy" />
+            <a href="https://www.eff.org/" target="_blank" rel="noopener noreferrer">Electronic Frontier Foundation
+              (EFF)</a>
+          </div>
+
+          <div>
+            <strong>⚖️ Fairness & Ethical Tech</strong><br />
+            <img src="img/AJL_logo.svg" alt="Free Software Foundation Logo" class="ico" loading="lazy" />
+            <a href="https://www.ajl.org/" target="_blank" rel="noopener noreferrer">Algorithmic Justice
+              League</a><br />
+            <img src="img/MozillaFoundation_logo.svg" alt="" class="ico" loading="lazy" />
+            <a href="https://foundation.mozilla.org/" target="_blank" rel="noopener noreferrer">Mozilla Foundation</a>
+          </div>
+        </div>
+      </details>
+
+      <p style="margin-top:14px;font-size:.85rem;opacity:.85;max-width:1000px;margin-left:auto;margin-right:auto;">
+        ✌️ I am against war in any form. I stand for science, open knowledge, open source, and fair competition.
+      </p>
+    </footer>
+  </main>
+
+
+  <script>
+    const now = new Date();
+    const currentYear = now.getFullYear();
+
+    const yearEl = document.getElementById("y");
+    if (yearEl) yearEl.textContent = currentYear;
+
+    const expEl = document.getElementById("yexp");
+    if (expEl) expEl.textContent = currentYear - 2015;
+  </script>
+
 </body>
+
 </html>
